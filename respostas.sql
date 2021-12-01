@@ -41,6 +41,24 @@ SELECT * FROM exames LIMIT 10;
 
 SELECT * FROM desfecho LIMIT 10;
 
+# Mudando a coluna 'ano_nascimento' para inteiro:
+UPDATE pacientes SET ano_nascimento = '0' 
+	WHERE ano_nascimento = 'YYYY' OR ano_nascimento = 'AAAA';
+ALTER TABLE pacientes ALTER COLUMN ano_nascimento 
+	TYPE integer USING (ano_nascimento::integer);
+
+
+# Vejamos a média de idade dos homens e das mulheres:
+SELECT sexo, ROUND(AVG(ano_nascimento)) as ano_nascimento_media
+	FROM pacientes WHERE ano_nascimento <> 0 GROUP BY sexo;
+
+
+# Vamos substituir os valores que estão como 0 na coluna ano_nascimento, pelas médias dos homens
+# para os homens, e pela média das mulheres para mulheres:
+UPDATE pacientes SET ano_nascimento = 1976 WHERE sexo = 'M' AND ano_nascimento = 0;
+UPDATE pacientes SET ano_nascimento = 1977 WHERE sexo = 'F' AND ano_nascimento = 0;
+
+
 # Vejamos quantos pacientes há na base de dados:
 SELECT COUNT(id) as qtd_pacientes FROM pacientes;
 
@@ -49,8 +67,8 @@ SELECT COUNT(DISTINCT(id_paciente)) as qtd_pacientes_com_algum_exame FROM exames
 
 # Verifiquemos qual paciente não possui correspondência na tabela exames
 SELECT pacientes.id FROM pacientes
-  LEFT JOIN exames ON exames.id_paciente = pacientes.id
-      WHERE exames.id_paciente IS NULL;
+	LEFT JOIN exames ON exames.id_paciente = pacientes.id
+    	WHERE exames.id_paciente IS NULL;
 
 # Verificando se há alguma desfecho do paciente acima
 SELECT * FROM desfecho WHERE desfecho.id_paciente = '9F161F1AFB4D6041';
@@ -60,15 +78,22 @@ DELETE FROM pacientes WHERE id = '9F161F1AFB4D6041';
 
 
 
+
+
+
+
+
+
+
 ############# EXERCICIO 2 ##############
 # Qual a quantidade de pacientes presente na base de dados?
 SELECT COUNT(id) qtd_pacientes FROM pacientes;
 
 # Quantos são homens e quantos são mulheres?
 SELECT sexo, COUNT(sexo) as qtd_total FROM pacientes 
-  WHERE sexo = 'F' GROUP BY sexo
+	WHERE sexo = 'F' GROUP BY sexo
 UNION
 SELECT sexo, COUNT(sexo) as qtd_total FROM pacientes 
-  WHERE sexo = 'M' GROUP BY sexo;
+	WHERE sexo = 'M' GROUP BY sexo;
 
 # Qual é faixa etária dos pacientes homens e mulheres?
