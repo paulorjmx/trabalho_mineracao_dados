@@ -58,6 +58,18 @@ SELECT sexo, ROUND(AVG(ano_nascimento)) as ano_nascimento_media
 UPDATE pacientes SET ano_nascimento = 1976 WHERE sexo = 'M' AND ano_nascimento = 0;
 UPDATE pacientes SET ano_nascimento = 1977 WHERE sexo = 'F' AND ano_nascimento = 0;
 
+# Vejamos quantos pacientes anonimizaram o municipio:
+SELECT municipio, COUNT(municipio) as total FROM pacientes
+	WHERE municipio = 'MMMM' GROUP BY municipio;
+
+# Substituiremos os pacientes que estão com o municpio com valo MMMM para a moda.
+# Vejamos qual é a moda de municipios:
+SELECT municipio, COUNT(municipio) as total FROM pacientes
+	WHERE municipio <> 'MMMM' GROUP BY municipio ORDER BY total DESC LIMIT 1;
+
+# Vamos substituir  MMMM por SAO PAULO:
+UPDATE pacientes SET municipio = 'SAO PAULO' WHERE municipio = 'MMMM';
+
 
 # Vejamos quantos pacientes há na base de dados:
 SELECT COUNT(id) as qtd_pacientes FROM pacientes;
@@ -75,6 +87,12 @@ SELECT * FROM desfecho WHERE desfecho.id_paciente = '9F161F1AFB4D6041';
 
 # Removendo o paciente
 DELETE FROM pacientes WHERE id = '9F161F1AFB4D6041';
+
+
+
+
+
+
 
 
 
