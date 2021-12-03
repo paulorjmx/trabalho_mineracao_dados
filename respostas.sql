@@ -94,15 +94,6 @@ DELETE FROM pacientes WHERE id = '9F161F1AFB4D6041';
 
 
 
-
-
-
-
-
-
-
-
-
 ############# EXERCICIO 2 ##############
 # Qual a quantidade de pacientes presente na base de dados?
 SELECT COUNT(id) qtd_pacientes FROM pacientes;
@@ -115,3 +106,10 @@ SELECT sexo, COUNT(sexo) as qtd_total FROM pacientes
 	WHERE sexo = 'M' GROUP BY sexo;
 
 # Qual é faixa etária dos pacientes homens e mulheres?
+# Para homens, temos:
+SELECT ano_nascimento, COUNT(ano_nascimento) as total FROM pacientes
+	WHERE sexo = 'M' GROUP BY ano_nascimento ORDER BY ano_nascimento ASC LIMIT 10;
+
+# Para mulheres, temos:
+SELECT ano_nascimento, COUNT(ano_nascimento) as total FROM pacientes
+	WHERE sexo = 'F' GROUP BY ano_nascimento ORDER BY ano_nascimento ASC LIMIT 10;
