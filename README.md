@@ -3,10 +3,10 @@ Este repositório abriga os arquivos necessários para a realização do trabalh
 
 ## Integrantes
 
-- Gabriell Tavares - 
-- João Marcos Deltodi -
-- Geoge Gantus - 
-- Paulo Ricardo Jordão Miranda - 10133456
+- Gabriell Tavares Luna - Nº USP 10716400
+- George Alexandre Gantus - Nº USP 10691988
+- João Marcos Della Torre Divino - Nº USP 10377708
+- Paulo Ricardo Jordão Miranda - Nº USP 10133456
 
 
 ## Restaurando o banco de dados
