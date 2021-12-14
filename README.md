@@ -5,6 +5,7 @@ Este repositório abriga os arquivos necessários para a realização do trabalh
 
 - Gabriell Tavares - 
 - João Marcos Deltodi -
+- Geoge Gantus - 
 - Paulo Ricardo Jordão Miranda - 10133456
 
 
