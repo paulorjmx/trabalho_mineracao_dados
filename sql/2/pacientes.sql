@@ -1,16 +1,16 @@
 --#### Exercicio 2
 
---Faixa etária
 
-select 
+--Faixa etária
+SELECT 
 	sexo,
-	max( date_part('year', age(to_date(ano_nascimento::varchar, 'yyyy'))) ),
-	min( date_part('year', age(to_date(ano_nascimento::varchar, 'yyyy'))) )
-from pacientes
-group by sexo
+	MAX( date_part('year', age(TO_DATE(ano_nascimento::varchar, 'yyyy'))) ),
+	MIN( date_part('year', age(TO_DATE(ano_nascimento::varchar, 'yyyy'))) )
+FROM pacientes
+GROUP BY sexo
+
 
 -- quartis
- 
 select
   sexo,
   percentile_disc(0.25) within group (order by extract(year from now()) - ano_nascimento),
@@ -18,8 +18,8 @@ select
   percentile_disc(0.75) within group (order by extract(year from now()) - ano_nascimento)
 from pacientes group by sexo
 
---Quartis por decada
 
+--Quartis por decada
 select
   sexo,
   floor((extract(year from now()) - ano_nascimento)/10),
@@ -28,8 +28,8 @@ select
   percentile_disc(0.75) within group (order by extract(year from now()) - ano_nascimento)
 from pacientes group by sexo,floor((extract(year from now()) - ano_nascimento)/10)
 
--- por idade testes e poisitivos
 
+-- por idade testes e poisitivos
 select distinct
 	(extract(year from now()) - ano_nascimento) as idade,
 	count(*) over(partition by (extract(year from now()) - ano_nascimento)) as total,
